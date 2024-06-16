@@ -26,7 +26,7 @@ function Signup() {
         e.preventDefault();
         try {
 
-            const response = await axios.post('http://localhost:8080/api/users/signup', formData);
+            const response = await axios.post('/api/users/signup', formData);
             if (response.status === 201) {
                 // 회원가입 성공 시 메인 페이지로 이동
                 navigate('/login');
