@@ -11,10 +11,14 @@ function Main(){
 
  const fetchCurrentUser = async () => {
     try {
-        const response = await axios.get('/api/users/myName');
-        setUsername(response.data);
-
-        console.log(response.data,'성공')
+        const response = await axios.get('http://localhost:8080/api/users/myName');
+        if(response.status === 200) {
+            setUsername(response.data);
+            console.log(response.data,'성공')
+        } else{
+            console.error("@check failed")
+        }
+        
     } catch(error) {
         console.error('Error', error)
         setUsername('');

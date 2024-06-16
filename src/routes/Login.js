@@ -23,7 +23,7 @@ function Login() {
         try {
             const response = await axios.post('/api/users/login', formData);
             if (response.status === 200 && response.data === "Login successful") {
-                navigate('/main');
+                // navigate('/main');
             } else {
                 alert('Invalid username or password');
             }
