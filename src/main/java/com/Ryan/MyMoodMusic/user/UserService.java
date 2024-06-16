@@ -1,7 +1,8 @@
 package com.Ryan.MyMoodMusic.user;
 
+import com.Ryan.MyMoodMusic.dto.LoginDto;
+import com.Ryan.MyMoodMusic.dto.UserDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public String addUser(UserDTO userDTO) {
+    public String addUser(UserDto userDTO) {
         System.out.println("Checking for existing username: " + userDTO.getUsername());
         Optional<User> existingUserOpt = userRepository.findByUsername(userDTO.getUsername());
         if (existingUserOpt.isPresent()) {
@@ -27,5 +28,19 @@ public class UserService {
         userRepository.save(user);
         return "User created";
     }
+
+//    public ResponseEntity<?> login(LoginDto loginDTO) {
+//        String username = loginDTO.getUsername();
+//        String password = loginDTO.getPassword();
+//        try {
+//            boolean existed = userRepository.existsByUsernameAndPassword(username,password);
+//            if(!existed) {
+//                return ResponseEntity.ok("입력하신 로그인 정보가 존재하지 않습니다");
+//            }
+//        } catch (Exception e){
+//            return ResponseEntity.ok("데이터베이스 연결에 실패했습니다");
+//
+//        }
+//    }
 
 }
