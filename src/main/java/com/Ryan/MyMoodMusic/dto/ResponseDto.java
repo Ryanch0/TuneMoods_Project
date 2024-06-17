@@ -13,7 +13,7 @@ public class ResponseDto<D> {
 
     //요청이 성공했음을 나타내는 응답 객체를 생성하는 정적 메서드
     public static <D> ResponseDto<D> setSuccess(String message) {
-        return ResponseDto.set(true,message,null);
+        return ResponseDto.set(true, message,null); // 성공 시 데이터 없이 메시지만 포함
     }
 
     // 요청이 실패했음을 나타내는 응답 객체를 생성하는 정적 메서드
@@ -29,6 +29,11 @@ public class ResponseDto<D> {
     // 요청이 실패했음을 나타내며 데이터도 포함하는 응답 객체를 생성하는 정적 메서드
     public static <D> ResponseDto<D> setFailedData(String message, D data) {
         return ResponseDto.set(false, message, data); // 실패 시 메시지와 데이터 모두 포함
+    }
+
+    //요청 성공여부 확인
+    public boolean getResult() {
+        return result;
     }
 
 
