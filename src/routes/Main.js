@@ -11,7 +11,9 @@ function Main(){
 
  const fetchCurrentUser = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/api/users/myName');
+        const response = await axios.get('http://localhost:8080/api/users/myName',{
+            withCredentials: true
+        });
         if(response.status === 200) {
             setUsername(response.data);
             console.log(response.data,'성공')

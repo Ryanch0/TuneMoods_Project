@@ -21,15 +21,19 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/users/login', formData);
-            if (response.status === 200 && response.data === "Login successful") {
-                // navigate('/main');
+            console.log(formData)
+            const response = await axios.post('/api/users/login', formData, {
+                headers : {'Content-Type': 'application/json'},
+                withCredentials: true
+            });
+            if (response.status === 200) {
+                navigate('/main');
             } else {
                 alert('Invalid username or password');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Invalid username or password');
+            alert('server error');
         }
     };
 
