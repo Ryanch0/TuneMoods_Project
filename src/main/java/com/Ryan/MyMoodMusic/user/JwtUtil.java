@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +15,15 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    static final SecretKey key =
-            Keys.hmacShaKeyFor(Decoders.BASE64.decode(
-                    "jwtpassword123jwtpassword123jwtpassword123jwtpassword123jwtpassword"
-            ));
+    @Value("${jwt.secret.key}")
+    private String secretKeyProperty;
+
+    public static SecretKey key;
+
+    @PostConstruct
+    public void init() {
+        key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKeyProperty));
+    }
 
     // JWT 만들어주는 함수
     public static String createToken(Authentication auth) {
