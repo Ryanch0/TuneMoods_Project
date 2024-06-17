@@ -12,6 +12,8 @@ function Signup() {
 
     });
 
+
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -27,15 +29,14 @@ function Signup() {
         try {
 
             const response = await axios.post('/api/users/signup', formData);
-            if (response.status === 200) {
+            if (response.status === 201) {
                 // 회원가입 성공 시 메인 페이지로 이동
                 navigate('/login');
-                console.log(formData);
             }
         } catch (error) {
             console.error('Error:', error);
             if (error.response && error.response.data) {
-                alert(error.response.data);
+                alert(error.response.data.message);
             } else {
                 alert('An error occurred. Please try again.');
             }
@@ -65,6 +66,7 @@ function Signup() {
                     onChange={handleChange} />
             </div>
             <button type="submit">Sign Up</button>
+
         </form>
     );
 };

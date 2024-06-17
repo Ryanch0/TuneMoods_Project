@@ -27,6 +27,8 @@ function Login() {
                 withCredentials: true
             });
             if (response.status === 200) {
+                document.cookie = `jwt=${response.data}; path=/;`;
+                console.log(response.data)
                 navigate('/main');
             } else {
                 alert('Invalid username or password');

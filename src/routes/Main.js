@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import axios from "../axiosConfig";
 import { useEffect, useState } from "react";
 
 function Main(){
     const[username,setUsername] = useState('');
+
+    const navigate = useNavigate();
 
 
     useEffect(()=>{
@@ -11,7 +14,7 @@ function Main(){
 
  const fetchCurrentUser = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/api/users/myName',{
+        const response = await axios.get('/api/users/myName',{
             withCredentials: true
         });
         if(response.status === 200) {
@@ -27,10 +30,23 @@ function Main(){
     }
 }
 
+const handleLogout = async() => {
+    try{
+        await axios.get('/logout',{ withCredentials: true })
+            navigate('/login')
+
+    }catch(error){
+        console.error(error)
+    }
+};
+
 return (
     <div>
         {username != ''? <h1>Welcome, {username}</h1>
         : <h1>You are not logged in</h1>}
+
+         <button onClick={handleLogout}>Logout</button>;
+
     </div>
 )
 }
