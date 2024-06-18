@@ -65,7 +65,6 @@ function Signup() {
                     onChange={handleChange} />
             </div>
             <button type="submit">Sign Up</button>
-
         </form>
     );
 };

@@ -1,8 +1,10 @@
 import { useState } from "react"
 import axios from "../axiosConfig"
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
-function Login() {
+
+function Login({setIsAuthenticated}) {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -27,9 +29,10 @@ function Login() {
                 withCredentials: true
             });
             if (response.status === 200) {
-                document.cookie = `jwt=${response.data}; path=/;`;
+                Cookies.set('jwt', response.data.token, { path: '/' });
                 console.log(response.data)
-                navigate('/main');
+                setIsAuthenticated(true)
+                navigate('/music');
             } else {
                 alert('Invalid username or password');
             }
@@ -64,6 +67,9 @@ function Login() {
             </div>
             <div style={{ height: '20px' }}></div>
             <button type="submit">Login</button>
+            <button onClick={()=>{
+                navigate('/signup')
+            }}>signup</button>
         </form>
 
     )
