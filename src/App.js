@@ -3,10 +3,9 @@ import './App.css';
 import Login from './routes/Login';
 import Signup from './routes/Signup';
 import Main from './routes/Main';
+import EmotionAnalyzer from './routes/EmotionAnalyzer';
 
 function App() {
-
-
 
   return (
     <div className="App">
@@ -21,6 +20,10 @@ function App() {
 
         <Route path='/main'
         element={<Main/>}>
+        </Route>
+
+        <Route path='/music'
+        element={<EmotionAnalyzer/>}>
         </Route>
 
 
