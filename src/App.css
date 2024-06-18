@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -67,13 +68,13 @@ h1 {
 }
 
 .input-field {
-  width: 80%;
+  width: 83%;
   padding: 10px;
-  margin-right: 10px;
 }
 
 .submit-button {
   padding: 10px 20px;
+  
 }
 
 .youtube-video {
@@ -83,9 +84,8 @@ h1 {
 }
 
 .recommendation-button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  background-color: #007bff;
+  padding: 10px;
+  background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
@@ -93,5 +93,22 @@ h1 {
 }
 
 .recommendation-button:hover {
-  background-color: #0056b3;
+  background-color: #333333;
 }
+
+.music-note {
+  font-size: 3rem;
+  margin-right: 10px;
+  color: #ff5733; /* 센스있고 멋있는 오렌지색 */
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+

@@ -19,19 +19,19 @@ function EmotionAnalyzer() {
         try {
             const response = await axios.post('/api/analyze-emotion', { text });
             const aiEmotion = response.data.emotion;
-            const aiRecommendations = response.data.recommended_music;
-            const query = text;
+            const aiMessageText = response.data.message || `기분이 ${aiEmotion} 이런 노래는 어떠세요?`;
+            const aiRecommendations = response.data.recommended_music || [];
 
-            const aiMessage = { sender: 'ai', text: `기분이 ${aiEmotion}하군요! 이런 노래는 어떠세요?` };
+            const aiMessage = { sender: 'ai', text: aiMessageText };
             const aiRecommendationsMessage = {
                 sender: 'ai',
                 recommendations: aiRecommendations,
-                query
+                query: text
             };
 
-            setChat([...chat, userMessage, aiMessage, aiRecommendationsMessage]);
+            setChat([...chat, userMessage, aiMessage, ...(aiRecommendations.length ? [aiRecommendationsMessage] : [])]);
             setPreviousVideos([...previousVideos, ...aiRecommendations.map(rec => rec.url)]);
-            setLastQuery(query);
+            setLastQuery(text);
         } catch (error) {
             console.error("There was an error processing your request!", error);
         }
@@ -41,11 +41,11 @@ function EmotionAnalyzer() {
 
     const handleRecommendationRequest = async (query) => {
         try {
-            const response = await axios.post('http://localhost:8080/api/analyze-emotion', { text: query });
-            const aiRecommendations = response.data.recommended_music;
+            const response = await axios.post('/api/analyze-emotion', { text: query });
+            const aiRecommendations = response.data.recommended_music || [];
             const newRecommendations = aiRecommendations.filter(rec => !previousVideos.includes(rec.url));
 
-            const aiMessage = { sender: 'ai', text: "다른 노래로 다시 추천해드릴게요!" };
+            const aiMessage = { sender: 'ai', text: "다른 노래로 다시 추천해드릴게요." };
             const aiRecommendationsMessage = {
                 sender: 'ai',
                 recommendations: newRecommendations,
@@ -66,7 +66,9 @@ function EmotionAnalyzer() {
 
     return (
         <div className="container">
-            <h1>Emotion Analyzer</h1>
+             <h1 className="logo">
+                <span className="music-note">&#9835;</span> 
+            </h1>
             <div className="chat-window">
                 {chat.map((msg, index) => (
                     <div key={index} className={`message ${msg.sender}`}>
@@ -83,9 +85,8 @@ function EmotionAnalyzer() {
                         {msg.recommendations && (
                             <button
                                 className="recommendation-button"
-                                onClick={() => handleRecommendationRequest(msg.query)}
-                            >
-                                다른 노래로 추천받기
+                                onClick={() => handleRecommendationRequest(msg.query)}>
+                                다른 노래 추천받기!
                             </button>
                         )}
                     </div>
@@ -96,10 +97,10 @@ function EmotionAnalyzer() {
                     type="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    placeholder="Enter your emotion"
+                    placeholder="감정 상태를 입력해 보세요!"
                     className="input-field"
                 />
-                <button type="submit" className="submit-button">Analyze</button>
+                <button type="submit" className="submit-button">전송</button>
             </form>
         </div>
     );
