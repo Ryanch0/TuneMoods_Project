@@ -39,6 +39,7 @@ function Login({setIsAuthenticated}) {
         } catch (error) {
             console.error('Error:', error);
             alert('server error');
+            // console.log(error.response.data.message)
         }
     };
 

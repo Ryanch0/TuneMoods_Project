@@ -3,7 +3,7 @@ import '../App.css';
 import axios from "../axiosConfig";
 import { useNavigate } from 'react-router-dom';
 
-function Sidebar({ playlists, username }) {
+function Sidebar({username}) {
 
     const navigate = useNavigate();
 
@@ -28,14 +28,14 @@ function Sidebar({ playlists, username }) {
             </div>
             <div className="playlists">
                 <h2>저장된 플레이리스트</h2>
-                <ul>
+                {/* <ul>
                     {playlists.map(function(a,i){
                         return (
                             <h4 key={i}>{a}</h4>
                         )
                     })
                     }
-                </ul>
+                </ul> */}
             </div>
         </div>
     );

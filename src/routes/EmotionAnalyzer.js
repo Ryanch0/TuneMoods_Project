@@ -12,14 +12,25 @@ function EmotionAnalyzer() {
     const [previousVideos, setPreviousVideos] = useState([]);
     
     // 사용자 정보와 플레이리스트 데이터 추가
-    const [playlists,setPlaylists] = useState(['플레이리스트 1', '플레이리스트 2', '플레이리스트 3']);
     const [username,setUsername] = useState('');
+    const [musicData, setMusicData] = useState({
+        playlists: '',
+        playlistsUrl: ''
+    });
+    
+    const[triggerAddPlaylist, setTriggerAddPlaylist] = useState(false);
 
     const navigate = useNavigate();
 
     useEffect(()=>{
         fetchCurrentUser();
     },[])
+
+    useEffect(()=>{
+        if(triggerAddPlaylist) {
+            addPlaylist();
+        }
+    },[musicData])
 
     const fetchCurrentUser = async () => {
         try {
@@ -38,8 +49,6 @@ function EmotionAnalyzer() {
             setUsername('');
         }
     }
-
-    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -96,6 +105,28 @@ function EmotionAnalyzer() {
         width: '400',
     };
 
+
+    // playlist저장
+    const addPlaylist = async (e) => {
+        try {
+
+            const response = await axios.post('/api/users/saveMusic', {...musicData, username});
+            if (response.status === 200) {
+                alert('저장완료!')
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            if (error.response && error.response.data) {
+                alert(error.response.data.message);
+            } else {
+                alert('An error occurred. Please try again.');
+            }
+        } finally {
+            setTriggerAddPlaylist(false);
+        }
+    };
+
+
     return (
         <div className="app-container">
             <div className="main-content">
@@ -125,8 +156,12 @@ function EmotionAnalyzer() {
                               <button
                               className="another-button"
                               onClick={function(){
-                                console.log(msg.recommendations[0].title) //노래 이름
-                                console.log(msg.recommendations[0].url)  //노래 url
+                                setMusicData({
+                                    playlists : msg.recommendations[0].title,
+                                    playlistsUrl : msg.recommendations[0].url
+                                });
+                                setTriggerAddPlaylist(true)
+                                console.log(musicData)
                               }}>
                               플레이리스트에 추가
                             </button>
@@ -147,7 +182,7 @@ function EmotionAnalyzer() {
                     <button type="submit" className="submit-button">전송</button>
                 </form>
             </div>
-            <Sidebar playlists={playlists} username={username}/>
+            <Sidebar username={username}/>
         </div>
     );
 }
