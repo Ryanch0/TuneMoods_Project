@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 
 
 function Login({setIsAuthenticated}) {
+
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -29,7 +30,7 @@ function Login({setIsAuthenticated}) {
                 withCredentials: true
             });
             if (response.status === 200) {
-                Cookies.set('jwt', response.data.token, { path: '/' });
+                Cookies.set('jwt', response.data.token, { path: '/', sameSite: 'None', secure: true });
                 console.log(response.data)
                 setIsAuthenticated(true)
                 navigate('/music');
@@ -38,9 +39,11 @@ function Login({setIsAuthenticated}) {
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('server error');
-            // console.log(error.response.data.message)
-        }
+            if (error.response && error.response.data && error.response.data.error) {
+                alert(error.response.data.error);
+            } else {
+                alert('Server error');
+            }        }
     };
 
     return (
