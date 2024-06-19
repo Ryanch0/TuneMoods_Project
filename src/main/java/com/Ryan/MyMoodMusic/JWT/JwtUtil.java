@@ -1,5 +1,6 @@
-package com.Ryan.MyMoodMusic.user;
+package com.Ryan.MyMoodMusic.JWT;
 
+import com.Ryan.MyMoodMusic.user.CustomUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

@@ -1,4 +1,4 @@
-package com.Ryan.MyMoodMusic.user;
+package com.Ryan.MyMoodMusic.JWT;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

@@ -23,6 +23,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private String playlists;
+    private String playlistsUrl;
+
     public User(SignupDto dto) {
         this.username = dto.getUsername();
         this.password = dto.getPassword();

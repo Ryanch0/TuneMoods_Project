@@ -26,7 +26,6 @@ public class UserService {
         } catch (Exception e) {
             return ResponseDto.setFailed("DB연결에 실패");
         }
-
             User user = new User(dto);
             String hashedPassword = passwordEncoder.encode(password);
             user.setPassword(hashedPassword);
@@ -36,7 +35,6 @@ public class UserService {
             return ResponseDto.setFailed("DB연결에 실패");
         }
         return ResponseDto.setSuccess("회원가입 성공!");
-
     }
 
 }

@@ -1,14 +1,17 @@
-package com.Ryan.MyMoodMusic.user;
+package com.Ryan.MyMoodMusic.controller;
 import com.Ryan.MyMoodMusic.dto.ResponseDto;
 import com.Ryan.MyMoodMusic.dto.SignupDto;
+import com.Ryan.MyMoodMusic.JWT.JwtUtil;
+import com.Ryan.MyMoodMusic.user.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -17,16 +20,14 @@ import java.util.Map;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
     //    회원가입
     @PostMapping("/signup")
-    public ResponseDto<?> signup(@RequestBody SignupDto signupDto) {
-        ResponseDto<?> result = userService.addUser(signupDto);
-        return result;
+    public ResponseEntity<ResponseDto<?>> signup(@RequestBody SignupDto signupDto) {
+        ResponseDto<?> response = userService.addUser(signupDto);
+        HttpStatus status = response.getResult() ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(response, status);
     }
 
     @PostMapping("/login")

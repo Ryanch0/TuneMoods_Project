@@ -1,6 +1,9 @@
 package com.Ryan.MyMoodMusic.config;
 
-import com.Ryan.MyMoodMusic.user.JwtFilter;
+import com.Ryan.MyMoodMusic.JWT.JwtFilter;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
 @Configuration
@@ -35,20 +39,41 @@ public class SecurityConfig {
         http.addFilterBefore(new JwtFilter(), ExceptionTranslationFilter.class);
 
 
+//        http.authorizeHttpRequests((authorize) ->
+//                authorize.requestMatchers("/**").permitAll()
+//        );
+
         http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/**").permitAll()
+                authorize
+                        .requestMatchers("/api/users/login", "/api/users/signup").permitAll()
+                        .anyRequest().authenticated()
         );
+
 
         http.formLogin(login -> login.disable());
 
-        http.logout(logout -> logout.logoutUrl("/logout")); //로그아웃 api
+        http.logout(logout -> logout.logoutUrl("/logout")
+                .logoutSuccessHandler(logoutSuccessHandler())); // 로그아웃 성공 시 쿠키 삭제
 
         return http.build();
     }
-
-
-
-
-
-
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return (HttpServletRequest request, HttpServletResponse response, org.springframework.security.core.Authentication authentication) -> {
+            Cookie cookie = new Cookie("jwt", null);
+            cookie.setPath("/");
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().flush();
+        };
+    }
 }
+
+
+
+
+
+
+
