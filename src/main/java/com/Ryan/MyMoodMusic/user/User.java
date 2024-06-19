@@ -2,16 +2,14 @@ package com.Ryan.MyMoodMusic.user;
 
 import com.Ryan.MyMoodMusic.dto.SignupDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +20,6 @@ public class User {
 
     @Column(nullable = false)
     private String password;
-
-    private String playlists;
-    private String playlistsUrl;
 
     public User(SignupDto dto) {
         this.username = dto.getUsername();

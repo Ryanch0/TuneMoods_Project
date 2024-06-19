@@ -39,15 +39,15 @@ public class SecurityConfig {
         http.addFilterBefore(new JwtFilter(), ExceptionTranslationFilter.class);
 
 
-//        http.authorizeHttpRequests((authorize) ->
-//                authorize.requestMatchers("/**").permitAll()
-//        );
-
         http.authorizeHttpRequests((authorize) ->
-                authorize
-                        .requestMatchers("/api/users/login", "/api/users/signup").permitAll()
-                        .anyRequest().authenticated()
+                authorize.requestMatchers("/**").permitAll()
         );
+
+//        http.authorizeHttpRequests((authorize) ->
+//                authorize
+//                        .requestMatchers("/api/users/login", "/api/users/signup").permitAll()
+//                        .anyRequest().authenticated()
+//        );
 
 
         http.formLogin(login -> login.disable());

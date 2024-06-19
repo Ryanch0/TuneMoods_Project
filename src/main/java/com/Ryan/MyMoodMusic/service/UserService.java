@@ -1,7 +1,9 @@
-package com.Ryan.MyMoodMusic.user;
+package com.Ryan.MyMoodMusic.service;
 
 import com.Ryan.MyMoodMusic.dto.ResponseDto;
 import com.Ryan.MyMoodMusic.dto.SignupDto;
+import com.Ryan.MyMoodMusic.user.User;
+import com.Ryan.MyMoodMusic.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
