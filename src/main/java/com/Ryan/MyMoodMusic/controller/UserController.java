@@ -64,7 +64,7 @@ public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String
 
         var cookie = new Cookie("jwt", jwt);
         cookie.setMaxAge(3600);
-        cookie.setHttpOnly(false); //보안상 true로 하는게 맞다
+        cookie.setHttpOnly(false); //보안상 true로 하는게 맞다 리액트서버에서 쿠키를 못가져와서 일단 false
         cookie.setPath("/");
         cookie.setSecure(true);
         response.addCookie(cookie);

@@ -7,6 +7,7 @@ import com.Ryan.MyMoodMusic.user.User;
 import com.Ryan.MyMoodMusic.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -67,4 +68,12 @@ public class PlaylistService {
         return userRepository.findByUsername(username);
     }
 
-}
+    @Transactional
+    public boolean deletePlaylist(String playlists) {
+        if(playlistRepository.existsByPlaylists(playlists)) {
+            playlistRepository.deleteByPlaylists(playlists);
+            return true;
+        } else{
+        return false;
+    }
+}}

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
     List<Playlist> findByUser(User user);
+    boolean existsByPlaylists(String playlists);
+    void deleteByPlaylists(String playlists);
 }
