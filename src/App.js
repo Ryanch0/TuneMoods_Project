@@ -6,15 +6,11 @@ import EmotionAnalyzer from './routes/EmotionAnalyzer';
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 
-
-
-
 function App() {
 
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
-
 
   useEffect(() => {
     const checkAuth = () => {
@@ -37,7 +33,6 @@ function App() {
 if (loading) {
   return <div>Loading...</div>; // 로딩 중일 때 표시할 컴포넌트
 }
-
 
   return (
     <div className="App">

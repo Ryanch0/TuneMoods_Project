@@ -16,7 +16,7 @@ function EmotionAnalyzer() {
         playlists: '',
         playlistsUrl: ''
     });
-    const [playlists, setPlaylists] = useState([]); // 사이드바와 공유할 상태
+    const [playlists, setPlaylists] = useState([]);
     const [triggerAddPlaylist, setTriggerAddPlaylist] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [modalVideoUrl, setModalVideoUrl] = useState('');
@@ -39,7 +39,7 @@ function EmotionAnalyzer() {
             });
             if (response.status === 200) {
                 setUsername(response.data);
-                fetchPlaylists(response.data); // 사용자 이름을 이용해 플레이리스트 가져오기
+                fetchPlaylists(response.data);
             } else {
                 console.error("@check failed");
             }
@@ -120,7 +120,7 @@ function EmotionAnalyzer() {
             const response = await axios.post('/api/users/saveMusic', { ...musicData, username });
             if (response.status === 200) {
                 alert('저장완료!');
-                setPlaylists([...playlists, musicData]); // 플레이리스트에 새 항목 추가
+                setPlaylists([...playlists, musicData]);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -138,7 +138,7 @@ function EmotionAnalyzer() {
         <div className="app-container">
             <div className="main-content">
                 <h1 className="logo">
-                    <span className="music-note">&#9835;</span> MyMoodMusic
+                    <span className="music-note">&#9835;</span> TuneMoods
                 </h1>
                 <div className="chat-window">
                     {chat.map((msg, index) => (
@@ -158,7 +158,7 @@ function EmotionAnalyzer() {
                                     <button
                                         className="recommendation-button"
                                         onClick={() => handleRecommendationRequest(msg.query)}>
-                                        다른 노래 추천받기!
+                                        다른 노래 추천받기
                                     </button>
                                     <button
                                         className="another-button"
@@ -169,7 +169,7 @@ function EmotionAnalyzer() {
                                             });
                                             setTriggerAddPlaylist(true);
                                         }}>
-                                        플레이리스트에 추가
+                                        플레이리스트에 저장
                                     </button>
                                 </>
                             )}
