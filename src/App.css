@@ -330,3 +330,19 @@ h1 {
   text-decoration: underline; /* 밑줄 추가 */
   color: inherit; /* 링크 색상을 기본 텍스트 색상과 동일하게 설정 */
 }
+.login-prompt {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.login-link {
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
