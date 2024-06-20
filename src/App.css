@@ -153,6 +153,27 @@ h1 {
   text-align: center;
   margin-left: 20px;
 }
+.playlist-content {
+  display: flex; /* Flexbox 사용 */
+  justify-content: space-between; /* 텍스트와 버튼을 양쪽 끝으로 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  width: 100%; /* 전체 너비 사용 */
+}
+
+.playlist-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-icon {
+  cursor: pointer; /* 클릭 가능하게 설정 */
+  padding-left: 10px; /* 텍스트와 아이콘 사이에 간격 추가 */
+  color: red; /* 아이콘 색상 설정 */
+  flex-shrink: 0; /* 아이콘이 줄어들지 않도록 설정 */
+}
+
+
 
 
 /* 기본 스타일 */
