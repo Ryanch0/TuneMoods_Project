@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom';
 
 // 예외처리 필요
 function Signup() {
+
+    // 폼 전송 data
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
-
-
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
