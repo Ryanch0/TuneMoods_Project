@@ -31,7 +31,7 @@ TuneMoods는 유저의 감정을 분석해 그에 맞는 어울리는 노래를 
 <br></br>
 ## Usecase Diagram
 <p align="center">
-<img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/6db0d104-0ae6-47db-9e3d-9695de0e7927" width="800px"/>
+<img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/e1c2ae4e-7501-4155-a838-ede934a61b55" width="700px"/>
 </p>
 
 <br></br>
@@ -39,24 +39,24 @@ TuneMoods는 유저의 감정을 분석해 그에 맞는 어울리는 노래를 
 <table style="width:100%">
   <tr>
     <td align="center">
-      <img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/5dbb0384-cae4-41b9-9782-a9da9be8bf7f" width="500px" />
+      <img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/e5b12e4d-15d3-499e-9327-f599b9e4c7cf" width="500px" />
       <br>
       <b>로그인 페이지</b>
     </td>
     <td align="center">
-      <img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/e400ae33-e438-4e7e-ab3e-512ca3734203" width="500px" />
+      <img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/5250cc99-6e4b-4007-a352-4a909fdd9486" width="500px" />
       <br>
       <b>회원가입 페이지</b>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/e960c9e4-6270-4fef-9cb3-5aaee16254f1" width="500px" />
+      <img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/f25b9110-cc51-4e82-8199-98f582ffc8db" width="500px" />
       <br>
       <b>메인 페이지</b>
     </td>
     <td align="center">
-      <img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/ed7b523e-84ec-4a1f-a918-13424d7fcf77" width="500px" />
+      <img src="https://github.com/Ryanch0/TuneMoods_Project/assets/165358637/31f8cc52-4945-42b4-994a-27003c5209f8" width="500px" />
       <br>
       <b>플레이리스트 재생</b>
     </td>
